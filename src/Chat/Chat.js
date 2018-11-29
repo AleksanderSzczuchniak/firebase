@@ -1,4 +1,5 @@
 import React from 'react'
+import { mapObjectToArray } from '../utils'
 
 import { database } from '../firebaseConfig'
 
@@ -15,34 +16,15 @@ class Chat extends React.Component {
   componentDidMount() {
     dbMessagesRef.on(
       'value',
-      snapshot => {
-        const messages = Object.entries(
-          snapshot.val()
-        ).map(entry => ({
-          ...entry[1],
-          key: entry[0]
-        }))
-
-        this.setState({ messages: messages })
-      }
+      snapshot => this.setState({
+        messeges: mapObjectToArray(snapshot.val())
+      })
     )
   }
 
-  componentWillUnmount(){
-    dbMessagesRef.off()
-  }
+  onNewMessageTextChangeHandler = event => this.setState({ newMessageText: event.target.value })
 
-  onNewMessageTextChangeHandler = event => (
-    this.setState({ newMessageText: event.target.value })
-  )
 
-  onNewMessageAddClickHandler = () => {
-    dbMessagesRef.push({
-      text: this.state.newMessageText,
-      timestamp: Date.now()
-    })
-    this.setState({ newMessageText: '' })
-  }
 
   render() {
     return (
