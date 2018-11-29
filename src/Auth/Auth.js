@@ -1,6 +1,6 @@
 import React from 'react'
 import { auth, googleProvider } from '../firebaseConfig'
-
+import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Forms from './Forms'
 
 class Auth extends React.Component {
@@ -38,10 +38,27 @@ class Auth extends React.Component {
     onLogInByGoogleClick = () => {
         auth.signInWithPopup(googleProvider)
     }
+    onLogOutClickHandler = () => {
+        auth.signOut()
+    }
     render() {
         return (
             this.state.isUserLoggedIn ?
-                this.props.children
+                <div>
+                    <FloatingActionButton
+                        style={{
+                            position: 'fixed',
+                            top: 10,
+                            right: 10,
+                            zIndex: 9999,
+                        }}
+                        secondary={true}
+                        onClick={this.onLogOutClickHandler}
+                    >
+                    X
+                    </FloatingActionButton>
+                    {this.props.children}
+            </div>
                 :
                 <Forms
                     email={this.state.email}
