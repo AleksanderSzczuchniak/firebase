@@ -1,11 +1,12 @@
 import React from 'react'
-import Paper from 'material-ui/Paper'
-import { TextField, RaisedButton } from 'material-ui/'
+
+import Forms from './Forms'
 
 class Auth extends React.Component {
     state = {
         email: '',
-        password: ''
+        password: '',
+        isUserLoggedIn: false
     }
     onEmailHandler = event => {
         this.setState({ email: event.target.value })
@@ -13,46 +14,17 @@ class Auth extends React.Component {
     onPasswordHandler = event => {
         this.setState({ password: event.target.value })
     }
+    onLogClick
+    onLogInByGoogleClick
     render() {
         return (
-            <Paper
-                style={{
-                    position: 'fixed'
-                }}
-            >
-                <TextField
-                    type='email'
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.onEmailHandler}
-                    fullWidth={true}
+            <Forms
+                email={this.state.email}
+                onEmailHandler={this.onEmailHandler}
+                password={this.state.password}
+                onPasswordHandler={this.state.password}
+            />
 
-                />
-                <TextField
-                    type='password'
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onPasswordHandler}
-                    fullWidth={true}
-
-                />
-                <RaisedButton
-                    style={{ margin: '5px 0' }}
-                    label={'Log in'}
-                    primary={true}
-                    onClick={this.onLigClick}
-                    fullWidth={true}
-                />
-                <RaisedButton
-                    style={{ margin: '5px 0' }}
-                    label={'Password'}
-                    primary={true}
-                    onClick={this.onLigClick}
-                    fullWidth={true}
-
-                />
-
-            </Paper>
         )
     }
 }
