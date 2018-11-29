@@ -10,7 +10,7 @@ const Forms = (props) => (
         }}
     >
         <TextField
-            type='email'
+            type="email"
             name="email"
             value={props.email}
             onChange={props.onEmailHandler}
@@ -19,7 +19,7 @@ const Forms = (props) => (
 
         />
         <TextField
-            type='password'
+            type="password"
             name="password"
             floatingLabelText="Password"
             value={props.password}
